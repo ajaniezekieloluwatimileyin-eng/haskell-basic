@@ -1,0 +1,93 @@
+-- HC4T1 - Task 1: Define a weatherReport Function
+weatherReport :: String -> String
+weatherReport "sunny"  = "It's a bright and beautiful day!"
+weatherReport "rainy"  = "Don't forget your umbrella!"
+weatherReport "cloudy" = "A bit gloomy, but no rain yet!"
+weatherReport _        = "Weather unknown"
+
+-- HC4T2 - Task 2: Define a dayType Function
+dayType :: String -> String
+dayType "Saturday" = "It's a weekend!"
+dayType "Sunday"   = "It's a weekend!"
+dayType "Monday"   = "It's a weekday."
+dayType "Tuesday"  = "It's a weekday."
+dayType "Wednesday"= "It's a weekday."
+dayType "Thursday" = "It's a weekday."
+dayType "Friday"   = "It's a weekday."
+dayType _          = "Invalid day"
+
+-- HC4T3 - Task 3: Define a gradeComment Function
+gradeComment :: Int -> String
+gradeComment grade
+  | grade >= 90 && grade <= 100 = "Excellent!"
+  | grade >= 70 && grade <= 89  = "Good job!"
+  | grade >= 50 && grade <= 69  = "You passed."
+  | grade >= 0  && grade <= 49  = "Better luck next time."
+  | otherwise                   = "Invalid grade"
+
+-- HC4T4 - Task 4: Rewrite specialBirthday using Pattern Matching
+specialBirthday :: Int -> String
+specialBirthday 1  = "First birthday, very special!"
+specialBirthday 18 = "Congrats on becoming an adult!"
+specialBirthday 50 = "Half a century old!"
+specialBirthday 100 = "A whole century!"
+specialBirthday _  = "Just another birthday."
+
+-- HC4T5 - Task 5: Add a Catch-All Pattern with a Custom Message
+specialBirthdayWithAge :: Int -> String
+specialBirthdayWithAge 1  = "First birthday, very special!"
+specialBirthdayWithAge 18 = "Congrats on becoming an adult!"
+specialBirthdayWithAge 50 = "Half a century old!"
+specialBirthdayWithAge 100 = "A whole century!"
+specialBirthdayWithAge age = "Happy " ++ show age ++ "th birthday!"
+
+-- HC4T6 - Task 6: Identify List Contents Using Pattern Matching
+whatsInsideThisList :: [a] -> String
+whatsInsideThisList []       = "The list is empty."
+whatsInsideThisList [x]      = "The list has one element."
+whatsInsideThisList [x,y]    = "The list has two elements."
+whatsInsideThisList (x:y:xs) = "The list has many elements."
+
+-- HC4T7 - Task 7: Ignore Elements in a List
+firstAndThird :: [a] -> (a, a)
+firstAndThird (x:_:z:_) = (x, z)
+firstAndThird _         = error "List must have at least three elements."
+
+-- HC4T8 - Task 8: Extract Values from Tuples
+describeTuple :: (String, Int) -> String
+describeTuple (name, age) = name ++ " is " ++ show age ++ " years old."
+
+-- MAIN for testing
+main :: IO ()
+main = do
+  -- Task 1
+  putStrLn (weatherReport "sunny")
+  putStrLn (weatherReport "rainy")
+  putStrLn (weatherReport "snowy")
+
+  -- Task 2
+  putStrLn (dayType "Sunday")
+  putStrLn (dayType "Monday")
+  putStrLn (dayType "Funday")
+
+  -- Task 3
+  putStrLn (gradeComment 95)
+  putStrLn (gradeComment 72)
+  putStrLn (gradeComment 40)
+  putStrLn (gradeComment 120)
+
+  -- Task 4 & 5
+  putStrLn (specialBirthday 18)
+  putStrLn (specialBirthdayWithAge 25)
+
+  -- Task 6
+  putStrLn (whatsInsideThisList ([] :: [Int]))
+  putStrLn (whatsInsideThisList [1])
+  putStrLn (whatsInsideThisList [1,2])
+  putStrLn (whatsInsideThisList [1,2,3,4])
+
+  -- Task 7
+  print (firstAndThird [10,20,30,40])
+
+  -- Task 8
+  putStrLn (describeTuple ("Alice", 30))
