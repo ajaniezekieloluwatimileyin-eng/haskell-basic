@@ -1,0 +1,93 @@
+-- HC5T1: Using applyTwice
+applyTwice :: (a -> a) -> a -> a
+applyTwice f x = f (f x)
+
+applyThrice :: (a -> a) -> a -> a
+applyThrice f x = f (applyTwice f x)
+
+
+-- HC5T2: Filtering Odd Numbers
+oddNumbers :: [Int]
+oddNumbers = filter odd [1..30]
+
+
+-- HC5T3: Checking for Uppercase Letters
+import Data.Char (isUpper)
+
+startsWithUpper :: String -> Bool
+startsWithUpper [] = False
+startsWithUpper (x:_) = isUpper x
+
+anyStartsWithUpper :: [String] -> Bool
+anyStartsWithUpper = any startsWithUpper
+
+
+-- HC5T4: Using Lambda Functions
+biggerThan10 :: Int -> Bool
+biggerThan10 = \x -> x > 10
+
+
+-- HC5T5: Partial Application
+multiplyByFive :: Int -> Int
+multiplyByFive = (* 5)
+
+
+-- HC5T6: Function Composition
+squaresOfEven :: [Int] -> [Int]
+squaresOfEven = filter even . map (^2)
+
+
+-- HC5T7: The $ Operator
+result :: Int
+result = sum $ map (*2) $ filter (>3) [1..10]
+
+
+-- HC5T8: Point-Free Style
+addFive :: Int -> Int
+addFive = (+ 5)
+
+
+-- HC5T9: Higher-Order Function to Transform a List
+transformList :: (a -> a) -> [a] -> [a]
+transformList f = map (applyTwice f)
+
+
+-- HC5T10: Combining Higher-Order Functions
+anySquareGreaterThan50 :: [Int] -> Bool
+anySquareGreaterThan50 = any (>50) . map (^2)
+
+
+-- MAIN FUNCTION
+main :: IO ()
+main = do
+    putStrLn "HC5T1: Apply function thrice (increment 5 by +1 thrice)"
+    print (applyThrice (+1) 5)
+
+    putStrLn "\nHC5T2: Odd numbers from 1 to 30"
+    print oddNumbers
+
+    putStrLn "\nHC5T3: Any word starts with uppercase?"
+    print (anyStartsWithUpper ["hello", "World", "haskell"])
+
+    putStrLn "\nHC5T4: Bigger than 10?"
+    print (biggerThan10 12)
+    print (biggerThan10 8)
+
+    putStrLn "\nHC5T5: Multiply by Five"
+    print (multiplyByFive 7)
+
+    putStrLn "\nHC5T6: Squares of even numbers"
+    print (squaresOfEven [1..10])
+
+    putStrLn "\nHC5T7: Using $ operator"
+    print result
+
+    putStrLn "\nHC5T8: Add Five"
+    print (addFive 15)
+
+    putStrLn "\nHC5T9: Transform list (apply function twice)"
+    print (transformList (+2) [1,2,3,4])
+
+    putStrLn "\nHC5T10: Any squared value > 50?"
+    print (anySquareGreaterThan50 [3,5,7])
+    print (anySquareGreaterThan50 [2,3,4])
